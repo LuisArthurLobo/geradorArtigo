@@ -1,0 +1,942 @@
+@import url('https://fonts.googleapis.com/css2?family=Fahkwang:wght@200;300;400&family=Kanit:wght@200;300;400;500&family=Shippori+Mincho+B1:wght@400;500;600&display=swap');
+
+/* Selection Styles */
+.container *::selection {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+}
+
+/* Color Variables */
+.container {
+  --text-primary: #072B63;      /* Main text color */
+  --text-secondary: #24272D;    /* Secondary text color */
+  --heading-primary: #FF5924;   /* Primary heading color (orange) */
+  --heading-secondary: #4A5465; /* Secondary heading color */
+  --heading-tertiary: #616f89;  /* Tertiary heading color */
+  --accent-color: #FF5924;      /* Accent color for special elements */
+  --background-color: #F8F9FA;  /* Light background color */
+  --selection-background: var(--accent-color); /* Selected text background */
+  --selection-text: #FFFFFF;    /* Selected text color */
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 3.88889rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  position: relative;
+  min-height: 100vh;
+  background: url('https://mymind.com/wp-content/uploads/2023/05/mymind_manifesto_neue-1.jpg') center / cover fixed no-repeat;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: -1;
+  border-radius: 0.6666666666666666rem;
+}
+
+/* Base Container Styles */
+
+.messageContainer {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.markdownContent {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.thinkingState {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Typography Styles */
+.question {
+  margin-bottom: 0.5555rem;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  font-size: 1.1111rem;
+  line-height: 1.8333;
+  letter-spacing: -0.03em;
+  color: var(--heading-secondary);
+}
+
+.answer {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  font-size: 1.1111rem;
+  line-height: 1.8333;
+  color: var(--text-secondary);
+}
+
+/* Markdown Typography */
+.markdownH1 {
+  font-family: 'Fahkwang', sans-serif;
+  font-weight: 300;
+  font-size: 3rem;
+  line-height: 3.5555rem;
+  letter-spacing: -0.04em;
+  color: var(--heading-primary);
+  margin-bottom: 2.2222rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdownH2 {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: var(--heading-secondary);
+  margin: 2.5rem 0 1.5rem;
+  scroll-margin-top: 2rem;
+  position: relative;
+}
+
+.markdownH3 {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.7222rem;
+  letter-spacing: 0.01rem;
+  color: var(--heading-tertiary);
+  margin-bottom: 1.1111rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdownParagraph {
+  font-family: 'Shippori Mincho B1', serif;
+  font-weight: 400;
+  font-size: 1.1111rem;
+  line-height: 1.8333;
+  color: var(--text-primary);
+  margin-bottom: 1.8333rem;
+  opacity: 0;
+  animation: fadeIn 0.2s ease-out forwards;
+  pointer-events: auto;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdownParagraphLead {
+  font-family: 'Shippori Mincho B1', serif;
+  font-weight: 500;
+  font-size: 1.3333rem;
+  line-height: 1.6111rem;
+  letter-spacing: 0.0366rem;
+  color: var(--accent-color);
+  margin-bottom: 2.2222rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Blockquote Styles */
+.markdownBlockquote {
+  position: relative;
+  padding-left: 3.3333rem;
+  margin: 3.3333rem 0;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+}
+
+.markdownBlockquoteContent {
+  position: relative;
+  padding: 2.2222rem;
+  color: var(--text-primary);
+}
+
+.markdownBlockquoteContent::before {
+  content: '';
+  position: absolute;
+  left: -3.3333rem;
+  top: 0;
+  bottom: 0;
+  width: 0.1666rem;
+  background-color: var(--heading-secondary);
+}
+
+/* List Styles */
+.container ul {
+  list-style: none;
+  padding-left: 1.5em;
+}
+
+.container ul li {
+  position: relative;
+  margin-bottom: 0.5em;
+}
+
+.container ul li::before {
+  content: "⚘";
+  position: absolute;
+  left: -1.5em;
+  color: var(--accent-color);
+}
+
+.markdownList {
+  margin: 2.7777rem 0;
+  padding-left: 2.7777rem;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+}
+
+.markdownListItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.3888rem;
+  color: var(--text-primary);
+  font-size: 1.1111rem;
+  line-height: 1.8333;
+  margin-bottom: 1.6666rem;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdownListBullet {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.markdownListBullet::before {
+  content: '⚘';
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: -2rem;
+  top: 0;
+  color: var(--accent-color);
+  background: none;
+  border-radius: 0;
+}
+
+/* Inline Text Styles */
+.markdownStrong {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 400;
+  color: var(--accent-color);
+  letter-spacing: -0.011rem;
+}
+
+.markdownEmphasis {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 200;
+  color: var(--accent-color);
+}
+
+/* Link Styles */
+.container a,
+.markdownLink {
+  color: var(--accent-color);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.container a::after,
+.markdownLink::after {
+  content: '↗';
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.9em;
+  transition: transform 0.2s ease-in-out;
+}
+
+.container a:hover,
+.markdownLink:hover {
+  text-decoration: underline;
+}
+
+.container a:hover::after,
+.markdownLink:hover::after {
+  transform: translate(2px, -2px);
+}
+
+/* Code Blocks */
+.markdownCode {
+  margin: 2.2222rem 0;
+  padding: 1.6666rem;
+  background-color: #f0f2f5;
+  border-radius: 1.1111rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8888rem;
+  line-height: 1.6666;
+  color: var(--text-primary);
+}
+
+.markdownCodeInline {
+  padding: 0.2777rem 0.5555rem;
+  background-color: #f0f2f5;
+  border-radius: 0.2777rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8888rem;
+  color: var(--text-primary);
+}
+
+/* Input Section Styles */
+.inputContainer {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  width: 90vw;
+  transform: translateX(-50%);
+  z-index: 1000;
+  transition: bottom .3s ease-out;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 22px rgb(116 130 151 / 14%);
+  border-radius: 30px;
+  padding: 7px;
+  margin-bottom: 10px;
+}
+
+.input {
+  flex: 1;
+  height: 36px;
+  border: none;
+  background: transparent;
+  padding: 0 15px;
+  font-family: "Nunito-SemiBold", sans-serif;
+  font-size: 16px;
+  color: #000;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input::placeholder {
+  color: #748297;
+  opacity: 0.7;
+}
+
+.button {
+  height: 36px;
+  padding: 0 20px;
+  background: #E2E6EE;
+  border: none;
+  border-radius: 18px;
+  font-family: "Nunito-SemiBold", sans-serif;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.button:hover {
+  background: #FF5924;
+  color: #FFFFFF;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.button:disabled {
+  background: #E2E6EE;
+  color: #748297;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 992px) {
+  .inputContainer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    transform: none;
+    margin-top: 2rem;
+  }
+
+  .inputGroup {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .button {
+    padding: 0 30px;
+  }
+}
+
+/* Loading States */
+.thinkingState {
+  padding: 0.5555rem;
+  color: var(--heading-secondary);
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  font-size: 0.8888rem;
+  letter-spacing: 0.0555rem;
+}
+
+/* Typing Animation Styles */
+.typingContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paragraphWrapper {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.paragraph {
+  line-height: 1.6;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.currentTypingText, .animatingText {
+  font-family: 'Flow Circular', cursive !important;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  color: var(--heading-primary);
+  transition: opacity 0.3s ease-out;
+}
+
+.completedText {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contentContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  contain: content;
+  overflow: visible;
+}
+
+.buttonContainer {
+  position: relative;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.typingContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  color: #1a1a1a;
+}
+
+.realContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2222rem;
+  color: inherit;
+}
+
+.paragraph {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.paragraphContent {
+  color: inherit;
+}
+
+.paragraphContent p,
+.paragraphContent h1,
+.paragraphContent h2,
+.paragraphContent h3,
+.paragraphContent ul,
+.paragraphContent ol,
+.paragraphContent li,
+.paragraphContent blockquote {
+  color: inherit;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.1111rem;
+  height: 1.3333rem;
+  background-color: var(--heading-secondary);
+  margin-left: 0.2777rem;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Text Hyphenation for all text elements */
+.markdownH1,
+.markdownH2,
+.markdownH3,
+.markdownParagraph,
+.markdownParagraphLead,
+.markdownBlockquote,
+.markdownListItem {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  /* Portuguese-specific hyphenation rules */
+  -webkit-locale: "pt-BR";
+  locale: "pt-BR";
+  hyphenate-limit-chars: 6 3 3; /* minimum word length: 6, minimum prefix: 3, minimum suffix: 3 */
+  hyphenate-limit-lines: 2; /* maximum number of consecutive hyphenated lines */
+  hyphenate-limit-zone: 8%; /* minimum space at the end of a line to trigger hyphenation */
+}
+
+/* Responsive Adjustments */
+/* Desktop (1024px to 1439px) */
+@media screen and (max-width: 1439px) {
+  .container {
+    padding: 2.5rem;
+    max-width: 1200px;
+  }
+}
+
+/* Tablet Landscape (768px to 1023px) */
+@media screen and (max-width: 1023px) {
+  .container {
+    padding: 2rem;
+  }
+
+  .markdownH1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .markdownH2 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .markdownH3 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01rem;
+  }
+}
+
+/* Tablet Portrait (481px to 767px) */
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .markdownH1 {
+    font-size: 2rem;
+    line-height: 2.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .markdownH2 {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .markdownH3 {
+    font-size: 0.95rem;
+    line-height: 1.4rem;
+  }
+
+  .markdownBlockquote {
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    border-radius: 0.5rem;
+  }
+
+  .markdownList {
+    padding-left: 1.25rem;
+  }
+}
+
+/* Mobile (480px and below) */
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .markdownH1 {
+    font-size: 1.75rem;
+    line-height: 2.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .markdownH2 {
+    font-size: 1.35rem;
+    line-height: 1.6rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .markdownH3 {
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+  }
+
+  .markdownParagraph,
+  .markdownParagraphLead {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .markdownBlockquote {
+    padding: 0.875rem 1rem;
+    margin: 1rem 0;
+  }
+
+  .markdownList {
+    padding-left: 1rem;
+  }
+
+  /* Improve touch targets on mobile */
+  .markdownListItem {
+    margin-bottom: 0.75rem;
+  }
+
+  /* Adjust code blocks for better mobile readability */
+  .markdownCodeInline {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+.bubble {
+  display: inline-block;
+  border-radius: 36px;
+  padding: 4px 18px;
+  margin: 0 2px;
+  font-family: "Nunito-SemiBold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+.bubble.orange {
+  background: linear-gradient(180deg, rgba(233, 143, 83, 0.06) 0%, rgba(233, 143, 83, 0) 100%);
+  color: #E98F53;
+  border: 1px solid #E98F53;
+}
+
+.bubble.pink {
+  background: linear-gradient(180deg, rgba(228, 138, 191, 0.06) 0%, rgba(228, 138, 191, 0) 100%);
+  color: #E48ABF;
+  border: 1px solid #E48ABF;
+}
+
+.bubble.blue {
+  background: linear-gradient(180deg, rgba(153, 210, 251, 0.06) 0%, rgba(153, 210, 251, 0) 100%);
+  color: #99D2FB;
+  border: 1px solid #99D2FB;
+}
+
+.bubble.red {
+  background: linear-gradient(180deg, rgba(234, 114, 107, 0.06) 0%, rgba(234, 114, 107, 0) 100%);
+  color: #EA726B;
+  border: 1px solid #EA726B;
+}
+
+.bubble.yellow {
+  background: linear-gradient(180deg, rgba(255, 207, 39, 0.06) 0%, rgba(255, 207, 39, 0) 100%);
+  color: #FFCF27;
+  border: 1px solid #FFCF27;
+}
+
+/* Suggestions Styles */
+.suggestionsContainer {
+  text-align: center;
+  margin: 4rem auto;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.suggestionsTitle {
+  font-family: 'Fahkwang', sans-serif;
+  font-weight: 200;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  color: var(--heading-primary);
+  margin-bottom: 2rem;
+}
+
+.suggestionsText {
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.suggestionsText .bubble {
+  cursor: pointer;
+  margin: 0 0.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.suggestionsText .bubble:hover {
+  transform: scale(1.05);
+}
+
+.suggestionsText .bubble:active {
+  transform: scale(0.95);
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.suggestions button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.suggestions button:hover {
+  transform: scale(1.05);
+}
+
+.suggestions button:active {
+  transform: scale(0.95);
+}
+
+/* Dots Navigation */
+.dotsNavigation {
+  position: fixed;
+  top: 50%;
+  right: 1.6666rem;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8333rem;
+}
+
+.dotItem {
+  display: flex;
+  align-items: center;
+  gap: 0.8333rem;
+  text-decoration: none;
+  flex-direction: row-reverse;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.dotItem:focus {
+  outline: none;
+}
+
+.dotItem.subSection {
+  margin-left: 1rem;
+}
+
+.dot {
+  width: 0.5555rem;
+  height: 0.5555rem;
+  background-color: var(--selection-text);
+  border: 1px solid var(--text-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  outline: none;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.dotItem.subSection .dot {
+  width: 0.3888rem;
+  height: 0.3888rem;
+  opacity: 0.3;
+}
+
+.dotLabel {
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.8333rem;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateX(1rem);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.dotItem.subSection .dotLabel {
+  font-size: 0.7222rem;
+  color: var(--heading-tertiary);
+}
+
+.dotItem:hover .dot {
+  transform: scale(1.2);
+}
+
+.dotItem:hover .dotLabel {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dotActive .dot {
+  background-color: var(--text-primary);
+  transform: scale(1.2);
+}
+
+.dotItem.subSection.dotActive .dot {
+  background-color: var(--heading-tertiary);
+}
+
+.dotActive .dotLabel {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--accent-color);
+}
+
+.dotItem.subSection.dotActive .dotLabel {
+  color: var(--heading-tertiary);
+}
+
+/* Version Info Styles */
+.versionInfo {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 18px;
+  margin: 2rem auto 1rem;
+  padding: 0.5rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.versionHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.versionText {
+  color: #666;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #6c757d;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  line-height: 1;
+  transition: color 0.2s;
+  margin-left: 1rem;
+}
+
+.closeButton:hover {
+  color: #343a40;
+}
+
+/* Generative Text Styles */
+.generativeText {
+  transition: font-family 0.3s ease-out;
+}
+
+.generating {
+  font-family: 'Flow Circular', cursive;
+  opacity: 0.85;
+}

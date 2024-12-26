@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Using Inter font from Google Fonts */
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-fahkwang: 'Fahkwang', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-kanit: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-shippori: 'Shippori Mincho B1', serif;
+
+  /* AI Career Guide Colors */
+  --text-primary: #072B63;      /* Main text color */
+  --text-secondary: #24272D;    /* Secondary text color */
+  --heading-primary: #FF5924;   /* Primary heading color (orange) */
+  --heading-secondary: #4A5465; /* Secondary heading color */
+  --heading-tertiary: #616f89;  /* Tertiary heading color */
+  --accent-color: #FF5924;      /* Accent color for special elements */
+  --background-color: #F8F9FA;  /* Light background color */
+  --selection-background: var(--accent-color); /* Selected text background */
+  --selection-text: #FFFFFF;    /* Selected text color */
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-fahkwang {
+  font-family: var(--font-fahkwang);
+}
+
+.font-kanit {
+  font-family: var(--font-kanit);
+}
+
+.font-shippori {
+  font-family: var(--font-shippori);
+}
+
+@layer base {
+  body {
+    @apply text-[rgb(7,43,99)] font-inter;
+  }
+}
+
+/* Font weight utility classes */
+.font-extralight {
+  font-weight: 200;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+/* Selection Styles */
+*::selection {
+  background-color: var(--selection-background);
+  color: var(--selection-text);
+}
