@@ -99,8 +99,8 @@ Abertura para reflexão adicional<regra2> `;
 const thinkingModel = genAI.getGenerativeModel({
   model: "gemini-1.5-flash-8b",
   generationConfig: {
-    temperature: 2,
-    topP: 2,
+    temperature: 1,
+    topP: 1,
     topK: 40,
     maxOutputTokens: 3500,
   },

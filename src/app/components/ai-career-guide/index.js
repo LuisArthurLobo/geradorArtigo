@@ -139,7 +139,8 @@ const AICareerGuide = () => {
     setCurrentProcessing(null);
   };
 
-
+  const handleLoremGenerate = () => {
+    // Lorem generate logic here
   };
 
   return (
