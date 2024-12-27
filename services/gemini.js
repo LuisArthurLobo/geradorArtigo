@@ -14,17 +14,18 @@ const genAI = new GoogleGenerativeAI(apiKey);
 let questionHistory = [];
 
 // Experimental thinking prompt to optimize questions
-const thinkingPrompt = `Analise a pergunta que foi feita para você de modo sugerir abordagens para respondê-la. Responda ela em estrutura de tópico, 
+const thinkingPrompt = `Analise a pergunta que foi feita para você de modo sugerir estruturas para respondê-la,sempre sobre contextualizando o assunto da pergunta com um viés sobre UX/UI design e design de produtos digitais. Responda ela em estrutura de tópico, 
 somente com as sugestões de abordagens. Sempre termine as frases com um ponto final
-Só responda perguntas sobre UX/UI design e design de produtos e se recuse a responder perguntas que não sejam sobre isso.`;
+Só responda perguntas sobre UX/UI design e design de produtos`;
 
 // Response generation prompt for sophisticated formatting
 const responsePrompt = ` 
+lembre de contextualizar o assunto falando sobreUX/UI design e design de produtos digitais
 
 <regra1>Formate usando todos os recursos do markdown para criar sofisticação e
 rica hierarquia e variância tipográfica, usando divisores, espaçamentos,
 blocos de citação, versaletes, links e tudo o que o markdown tem a oferecer. Não fale sobre markdown na resposta, apenas use as tags</regra1>
-<regra2>Use todos esses elementos Elementos Estruturais ao formular sua resposta
+<regra2>Use todos esses elementos Elementos Estruturais ao formular sua resposta, mas não fale sobre eles na resposta</regra2>
 
 Parágrafos variam entre curtos (1-2 frases) e longos (4-5 frases), criando ritmo dinâmico
 Seções claramente demarcadas com subtítulos descritivos

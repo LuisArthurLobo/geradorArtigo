@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './styles.module.css';
-import LoremButton from '../lorem-button';
+
 
 const InputSection = ({ 
   topic, 
   setTopic, 
   generateContent, 
   currentProcessing,
-  onLoremGenerate 
 }) => {
   return (
     <div className={styles.inputContainer}>
@@ -16,7 +15,7 @@ const InputSection = ({
           type="text"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          placeholder="Ask about your career..."
+          placeholder="O que você gostaria de aprender?"
           className={styles.input}
           onKeyPress={(e) => e.key === 'Enter' && generateContent()}
         />
@@ -25,12 +24,12 @@ const InputSection = ({
           className={styles.button}
           disabled={!topic.trim() || currentProcessing}
         >
-          {currentProcessing?.state === 'thinking' ? 'Thinking...' : 
-           currentProcessing?.state === 'typing' ? 'Generating...' : 
-           'Ask'}
+          {currentProcessing?.state === 'thinking' ? 'Pensando...' : 
+           currentProcessing?.state === 'typing' ? 'Gerando...' : 
+           'Perguntar'}
         </button>
       </div>
-      <LoremButton onGenerateText={onLoremGenerate} />
+   
     </div>
   );
 };

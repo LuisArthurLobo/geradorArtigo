@@ -14,12 +14,62 @@ const AICareerGuide = () => {
   const messagesContainerRef = useRef(null);
 
   const suggestions = [
-    { text: "Career transition tips", color: "orange" },
-    { text: "Resume writing", color: "pink" },
-    { text: "Interview preparation", color: "blue" },
-    { text: "Salary negotiation", color: "red" },
-    { text: "Work-life balance", color: "yellow" }
-  ];
+    // Originais
+    { text: "Transição de carreira", color: "orange" },
+    { text: "Melhorar currículo", color: "pink" },
+    { text: "Entrevistas", color: "blue" },
+    { text: "Negociar salário", color: "red" },
+    { text: "Equilíbrio vida/trabalho", color: "yellow" },
+
+    // UX/UI
+    { text: "Design systems", color: "orange" },
+    { text: "Prototipação", color: "pink" },
+    { text: "Pesquisa UX", color: "blue" },
+    { text: "UI para mobile", color: "red" },
+    { text: "Acessibilidade", color: "yellow" },
+    { text: "Usabilidade", color: "orange" },
+    { text: "Arquitetura da Informação", color: "pink" },
+    { text: "Design de Interação", color: "blue" },
+    { text: "Wireframes", color: "red" },
+    { text: "Testes A/B", color: "yellow" },
+
+
+    // Produtos
+    { text: "Discovery", color: "orange" },
+    { text: "Métricas", color: "pink" },
+    { text: "Roadmap", color: "blue" },
+    { text: "MVP", color: "red" },
+    { text: "OKRs", color: "yellow" },
+    { text: "Priorização", color: "orange" },
+    { text: "Análise de dados", color: "pink" },
+    { text: "Growth Hacking", color: "blue" },
+    { text: "Product backlog", color: "red" },
+    { text: "Visão de produto", color: "yellow" },
+
+    // Ferramentas
+    { text: "Figma", color: "orange" },
+    { text: "Miro", color: "pink" },
+    { text: "Maze", color: "blue" },
+    { text: "UserTesting", color: "red" },
+    { text: "Optimal Workshop", color: "yellow" },
+    { text: "Sketch", color: "pink" },
+    { text: "InVision", color: "blue" },
+    { text: "Axure", color: "red" },
+    { text: "Framer", color: "yellow" },
+
+
+    // Carreira
+    { text: "Portfólio", color: "orange" },
+    { text: "Freelancer", color: "pink" },
+    { text: "Mentoria", color: "blue" },
+    { text: "Certificações", color: "red" },
+    { text: "Networking", color: "yellow" },
+    { text: "Estágios", color: "orange" },
+    { text: "Trabalho remoto", color: "pink" },
+    { text: "Comunidades online", color: "blue" },
+    { text: "Eventos", color: "red" },
+    { text: "Desenvolvimento pessoal", color: "yellow" }
+];
 
   // Initialize with default values to avoid hydration mismatch
   const [randomSuggestions, setRandomSuggestions] = useState([
@@ -89,12 +139,7 @@ const AICareerGuide = () => {
     setCurrentProcessing(null);
   };
 
-  const handleLoremGenerate = (text) => {
-    setCurrentProcessing({
-      question: "Generate some Lorem Ipsum text",
-      state: 'typing',
-      answer: text
-    });
+
   };
 
   return (
@@ -102,9 +147,10 @@ const AICareerGuide = () => {
       {messages.length === 0 && !currentProcessing && (
         <>
           <div className={styles.suggestionsContainer}>
-            <h2 className={styles.suggestionsTitle}>Let me help you with your career journey!</h2>
+            <h2 className={styles.suggestionsTitle}>Vou te ajudar a acelerar sua carreira</h2>
+            <h3 className={styles.markdownH3}>Sendo na área de produtos digitais, conte comigo 		ツ.</h3>
             <p className={styles.suggestionsText}>
-              I can assist you with
+              <br/> As perguntas mais comuns agora são 
               <span className={`${styles.bubble} ${styles.orange}`} onClick={() => handleSuggestionClick(randomSuggestions[0])}>
                 {randomSuggestions[0]}
               </span>
@@ -117,14 +163,14 @@ const AICareerGuide = () => {
               <span className={`${styles.bubble} ${styles.red}`} onClick={() => handleSuggestionClick(randomSuggestions[3])}>
                 {randomSuggestions[3]}
               </span>
-              and
+              e
               <span className={`${styles.bubble} ${styles.yellow}`} onClick={() => handleSuggestionClick(randomSuggestions[4])}>
                 {randomSuggestions[4]}
               </span>
-              topics.
+              
             </p>
           </div>
-          <VersionInfo />
+        
         </>
       )}
       
@@ -167,6 +213,7 @@ const AICareerGuide = () => {
         currentProcessing={currentProcessing}
         onLoremGenerate={handleLoremGenerate}
       />
+      <VersionInfo />
     </div>
   );
 };

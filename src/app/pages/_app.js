@@ -3,7 +3,7 @@ import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <main className={`${inter.variable} ${fahkwang.variable} ${kanit.variable} ${shipporiMincho.variable} font-sans`}>
+    <main>
       <Component {...pageProps} />
     </main>
   );
