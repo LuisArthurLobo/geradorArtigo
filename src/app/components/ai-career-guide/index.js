@@ -11,15 +11,34 @@ const AICareerGuide = () => {
   const [messages, setMessages] = useState([]);
   const [currentProcessing, setCurrentProcessing] = useState(null);
   const [error, setError] = useState(null);
+  const [suggestions, setSuggestions] = useState([
+    { text: "Desenvolvimento pessoal", color: "orange" },
+    { text: "UI para mobile", color: "pink" },
+    { text: "InVision", color: "blue" }
+  ]);
   const messagesContainerRef = useRef(null);
 
-  const suggestions = [
+  const allSuggestions = [
     { text: "Desenvolvimento pessoal", color: "orange" },
     { text: "UI para mobile", color: "pink" },
     { text: "InVision", color: "blue" },
-    { text: "Priorização", color: "red" },
-    { text: "Testes A/B", color: "yellow" }
+    { text: "Priorização", color: "orange" },
+    { text: "Testes A/B", color: "pink" },
+    { text: "Design System", color: "blue" },
+    { text: "Gestão de produto", color: "orange" },
+    { text: "UX Research", color: "pink" },
+    { text: "Metodologias ágeis", color: "blue" }
   ];
+
+  useEffect(() => {
+    // Shuffle and pick 3 random suggestions
+    const shuffled = [...allSuggestions].sort(() => Math.random() - 0.5);
+    setSuggestions([
+      { ...shuffled[0], color: "orange" },
+      { ...shuffled[1], color: "pink" },
+      { ...shuffled[2], color: "blue" }
+    ]);
+  }, []); // Empty dependency array means this runs once on mount
 
   const handleSuggestionClick = (suggestion) => {
     setTopic(suggestion);
@@ -99,24 +118,24 @@ const AICareerGuide = () => {
             <button
               className={styles.topicTag}
               data-color="orange"
-              onClick={() => handleSuggestionClick("Desenvolvimento pessoal")}
+              onClick={() => handleSuggestionClick(suggestions[0].text)}
             >
-              <span>Desenvolvimento pessoal</span>
+              <span>{suggestions[0].text}</span>
             </button>
             <button
               className={styles.topicTag}
               data-color="pink"
-              onClick={() => handleSuggestionClick("UI para mobile")}
+              onClick={() => handleSuggestionClick(suggestions[1].text)}
             >
-              <span>UI para mobile</span>
+              <span>{suggestions[1].text}</span>
             </button>
             <span className={styles.topicConnector}>e</span>
             <button
               className={styles.topicTag}
               data-color="blue"
-              onClick={() => handleSuggestionClick("InVision")}
+              onClick={() => handleSuggestionClick(suggestions[2].text)}
             >
-              <span>InVision</span>
+              <span>{suggestions[2].text}</span>
             </button>
           </div>
         </div>
