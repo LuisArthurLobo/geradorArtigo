@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 import renderMarkdown from './markdownRenderer';
 import LoremButton from '../lorem-button';
-import FontLoader from './FontLoader';
+import Head from 'next/head';
 
 const TypingAnimation = ({ text, onComplete, typingSpeed = { delay: 100 } }) => {
   const [displayedParagraphs, setDisplayedParagraphs] = useState([]);
@@ -66,7 +66,11 @@ const TypingAnimation = ({ text, onComplete, typingSpeed = { delay: 100 } }) => 
 
   return (
     <>
-      <FontLoader />
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Redacted+Script:wght@300;400;700&display=swap" rel="stylesheet" />
+      </Head>
       <div className={styles.typingContainer}>
         {displayedParagraphs.map((paragraph, index) => (
           <div 
@@ -80,6 +84,7 @@ const TypingAnimation = ({ text, onComplete, typingSpeed = { delay: 100 } }) => 
                 ${isComplete ? styles.completedText : styles.animatingText}
                 ${isFading ? styles.fadeOut : styles.fadeIn}
               `}
+              style={{ fontFamily: '"Redacted Script", serif' }}
             >
               {isComplete ? renderMarkdown(paragraph) : paragraph}
             </div>

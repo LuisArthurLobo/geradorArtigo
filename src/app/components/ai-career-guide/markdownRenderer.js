@@ -7,24 +7,11 @@ import { heading, subheading, paragraph } from '../../styles/fonts';
 
 const MarkdownComponents = {
   // Title styling with Fahkwang font
-  h1: ({ children }) => {
-    const text = React.Children.toArray(children)
-      .map(child => typeof child === 'string' ? child.replace(/\s+/g, ' ').trim() : '')
-      .filter(Boolean)
-      .join(' ');
-    
-    const words = text.split(/(\s+)/).filter(Boolean);
-    
-    return (
-      <h1 className={`${styles.markdownH1} ${heading.className}`}>
-        {words.map((word, index) => (
-          <span key={index} className={styles.markdownH1Word}>
-            {word}
-          </span>
-        ))}
-      </h1>
-    );
-  },
+  h1: ({ children }) => (
+    <h1 className={`${styles.markdownH1} ${heading.className}`}>
+      {children}
+    </h1>
+  ),
 
   // Handle special characters and dashes
   text: ({ children }) => {
@@ -40,17 +27,23 @@ const MarkdownComponents = {
   },
 
   // Section headers with Kanit font
-  h2: ({ children }) => (
-    <h2 className={`${styles.markdownH2} ${subheading.className}`}>
-      {children}
-    </h2>
-  ),
+  h2: ({ children }) => {
+    console.log('Rendering H2:', children);
+    return (
+      <h2 className={`${styles.markdownH2} ${subheading.className}`}>
+        {children}
+      </h2>
+    );
+  },
 
-  h3: ({ children }) => (
-    <h3 className={`${styles.markdownH3} ${subheading.className}`}>
-      {children}
-    </h3>
-  ),
+  h3: ({ children }) => {
+    console.log('Rendering H3:', children);
+    return (
+      <h3 className={`${styles.markdownH3} ${subheading.className}`}>
+        {children}
+      </h3>
+    );
+  },
 
   // Paragraphs with Shippori Mincho B1 font
   p: ({ children, className }) => {
@@ -123,10 +116,12 @@ const MarkdownComponents = {
   // Code blocks with syntax highlighting
   code: ({ node, inline, className, children, ...props }) => {
     const match = /language-(\w+)/.exec(className || '');
-    return !inline && match ? (
+    const language = match ? match[1] : '';
+    
+    return !inline && language ? (
       <SyntaxHighlighter
         style={atomDark}
-        language={match[1]}
+        language={language}
         PreTag="div"
         className={styles.markdownCodeBlock}
         {...props}
@@ -134,7 +129,7 @@ const MarkdownComponents = {
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     ) : (
-      <code className={styles.markdownCode} {...props}>
+      <code className={styles.inlineCode} {...props}>
         {children}
       </code>
     );
@@ -164,13 +159,19 @@ const MarkdownComponents = {
 };
 
 const renderMarkdown = (content) => {
+  console.log('Rendering markdown content:', {
+    content,
+    hasH2: content.includes('##'),
+    hasH3: content.includes('###')
+  });
+  
   return (
     <ReactMarkdown
       components={MarkdownComponents}
-      children={content}
-      remarkPlugins={[]}
-      rehypePlugins={[]}
-    />
+      className={styles.markdownContent}
+    >
+      {content}
+    </ReactMarkdown>
   );
 };
 

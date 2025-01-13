@@ -5,12 +5,14 @@ import renderMarkdown from './markdownRenderer';
 import InputSection from './InputSection';
 import DotsNavigation from './DotsNavigation';
 import VersionInfo from './VersionInfo';
+import ThinkingAnimation from './ThinkingAnimation';
 
 const AICareerGuide = () => {
   const [topic, setTopic] = useState('');
   const [messages, setMessages] = useState([]);
   const [currentProcessing, setCurrentProcessing] = useState(null);
   const [error, setError] = useState(null);
+  const [contentReady, setContentReady] = useState(false);
   const [suggestions, setSuggestions] = useState([
     { text: "Desenvolvimento pessoal", color: "orange" },
     { text: "UI para mobile", color: "pink" },
@@ -88,6 +90,7 @@ const AICareerGuide = () => {
       setMessages(prev => [...prev, {
         answer: currentProcessing.answer
       }]);
+      setContentReady(true);
     }
     setCurrentProcessing(null);
   };
@@ -152,14 +155,7 @@ const AICareerGuide = () => {
           {currentProcessing && (
             <div className={styles.messageContainer}>
               {currentProcessing.state === 'thinking' ? (
-                <div className={styles.thinkingState}>
-                  <div className={styles.thinkingDots}>
-                    <span>Thinking</span>
-                    <span className={styles.dot}>.</span>
-                    <span className={styles.dot}>.</span>
-                    <span className={styles.dot}>.</span>
-                  </div>
-                </div>
+                <ThinkingAnimation />
               ) : currentProcessing.state === 'typing' ? (
                 <div className={`${styles.markdownContent} prose prose-xl dark:prose-invert max-w-none ai-text`}>
                   <TypingAnimation 
@@ -171,7 +167,7 @@ const AICareerGuide = () => {
             </div>
           )}
         </div>
-        <DotsNavigation messagesContainerRef={messagesContainerRef} />
+        <DotsNavigation messagesContainerRef={messagesContainerRef} contentReady={contentReady} />
         <div className={styles.versionInfo}>
           <VersionInfo />
         </div>
