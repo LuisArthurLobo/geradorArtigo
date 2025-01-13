@@ -102,6 +102,16 @@
   font-size: 16px;
   color: #67738A;
   box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.inputError {
+  border-color: #ff4d4f;
+}
+
+.inputError:focus {
+  border-color: #ff7875;
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
 }
 
 .searchButton {
@@ -120,6 +130,11 @@
   color: #67738A;
   transition: all 0.2s ease-in-out;
   box-sizing: border-box;
+}
+
+.buttonDisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .topicsContainer {
@@ -202,6 +217,14 @@
   font-size: 16px;
   line-height: 1.6;
   color: #333;
+}
+
+.errorMessage {
+  color: #ff4d4f;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: left;
+  width: 100%;
 }
 
 /* Mobile Responsive Styles */

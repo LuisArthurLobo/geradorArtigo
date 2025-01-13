@@ -29,6 +29,7 @@ const AICareerGuide = () => {
   const generateContent = async () => {
     if (!topic.trim()) return;
     
+    setError(null);
     setCurrentProcessing({
       question: topic,
       state: 'thinking'
@@ -40,11 +41,12 @@ const AICareerGuide = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ topic }),
+        body: JSON.stringify({ topic: topic.trim() }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to generate content');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to generate content');
       }
 
       const data = await response.json();
@@ -57,7 +59,7 @@ const AICareerGuide = () => {
 
       setTopic('');
     } catch (err) {
-      setError('Failed to generate content. Please try again.');
+      setError(err.message || 'Failed to generate content. Please try again.');
       setCurrentProcessing(null);
     }
   };
@@ -89,6 +91,7 @@ const AICareerGuide = () => {
             setTopic={setTopic}
             onSubmit={generateContent}
             currentProcessing={currentProcessing}
+            error={error}
           />
 
           <div className={styles.topicsContainer}>
