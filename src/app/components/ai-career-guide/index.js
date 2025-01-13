@@ -146,7 +146,7 @@ const AICareerGuide = () => {
         <div className={styles.messagesContainer} ref={messagesContainerRef}>
           {messages.map((message, index) => (
             <div key={index} className={styles.messageContainer}>
-              <div className={`${styles.markdownContent} prose prose-xl dark:prose-invert max-w-none ai-text`}>
+              <div className="prose prose-xl dark:prose-invert max-w-none ai-text" style={{ overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word' }}>
                 {renderMarkdown(message.answer)}
               </div>
             </div>
@@ -157,7 +157,7 @@ const AICareerGuide = () => {
               {currentProcessing.state === 'thinking' ? (
                 <ThinkingAnimation />
               ) : currentProcessing.state === 'typing' ? (
-                <div className={`${styles.markdownContent} prose prose-xl dark:prose-invert max-w-none ai-text`}>
+                <div className="prose prose-xl dark:prose-invert max-w-none ai-text" style={{ overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word' }}>
                   <TypingAnimation 
                     text={currentProcessing.answer}
                     onComplete={handleTypingComplete}

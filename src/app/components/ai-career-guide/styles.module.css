@@ -4,17 +4,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px 24px;
-  gap: 29px;
-  position: relative;
   width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding: 1rem;
   min-height: 100vh;
   background: radial-gradient(117.17% 117.17% at 50% 11.39%, rgba(255, 255, 255, 0) 63%, rgba(216, 141, 187, 0.04) 67.5%, rgba(247, 169, 144, 0.33) 78%, rgba(240, 99, 55, 0.92) 87.5%, #F06337 100%), #FFFFFF;
   background-attachment: fixed;
-  background-size: auto 100vh;
+  background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .headerContainer {
@@ -232,29 +240,115 @@
 }
 
 .markdownContent {
-  font-family: 'EB Garamond', serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333;
   width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.markdownContent h1,
+.markdownContent h2,
+.markdownContent h3,
+.markdownContent p {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  margin: 0.5em 0;
+}
+
+.messageContainer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.messagesContainer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .messageContainer {
+    padding: 0.5rem;
+  }
+  
+  .messagesContainer {
+    gap: 0.5rem;
+  }
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 @media screen and (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+
   .markdownContent {
     width: 80%;
     padding: 2.5rem;
   }
+
+  .gridContainer {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
 }
 
-.errorMessage {
-  color: #ff4d4f;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  text-align: left;
-  width: 100%;
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  .contentWrapper,
+  .markdownContent,
+  .messageContainer,
+  .card {
+    padding: 0.5rem;
+  }
+
+  .gridContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
 }
 
-/* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
   .container {
     padding: 24px 16px;
@@ -1071,6 +1165,23 @@
 
   .markdownList {
     padding-left: 1.25rem;
+  }
+
+  .markdownList {
+    padding-left: 2rem;
+    margin: 2rem 0;
+  }
+
+  .markdownListItem {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .markdownListBullet::before {
+    left: -1.5rem;
+    top: -0.1rem;
   }
 }
 

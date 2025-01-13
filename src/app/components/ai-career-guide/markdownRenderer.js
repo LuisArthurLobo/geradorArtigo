@@ -27,23 +27,17 @@ const MarkdownComponents = {
   },
 
   // Section headers with Kanit font
-  h2: ({ children }) => {
-    console.log('Rendering H2:', children);
-    return (
-      <h2 className={`${styles.markdownH2} ${subheading.className}`}>
-        {children}
-      </h2>
-    );
-  },
+  h2: ({ children }) => (
+    <h2 className={`${styles.markdownH2} ${subheading.className}`}>
+      {children}
+    </h2>
+  ),
 
-  h3: ({ children }) => {
-    console.log('Rendering H3:', children);
-    return (
-      <h3 className={`${styles.markdownH3} ${subheading.className}`}>
-        {children}
-      </h3>
-    );
-  },
+  h3: ({ children }) => (
+    <h3 className={`${styles.markdownH3} ${subheading.className}`}>
+      {children}
+    </h3>
+  ),
 
   // Paragraphs with Shippori Mincho B1 font
   p: ({ children, className }) => {
@@ -85,14 +79,10 @@ const MarkdownComponents = {
     );
   },
 
-  // Lists with custom bullets
+  // List components
   ul: ({ children }) => (
-    <ul className={styles.markdownList}>
-      {children}
-    </ul>
+    <ul className={styles.markdownList}>{children}</ul>
   ),
-
-  // List items with square bullets
   li: ({ children }) => (
     <li className={styles.markdownListItem}>
       <span className={styles.markdownListBullet}></span>
