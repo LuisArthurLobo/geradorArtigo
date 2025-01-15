@@ -113,15 +113,15 @@ const responseModel = genAI.getGenerativeModel({
     topP: 0.95,
     topK: 40,
     maxOutputTokens: 8192,
-  },
-  tools: [{
-    google_search_retrieval: {
-      dynamic_retrieval_config: {
-        mode: "MODE_DYNAMIC",
-        dynamic_threshold: 0.1,
-      }
-    }
-  }]
+  }
+  //, tools: [{
+  //   google_search_retrieval: {
+  //     dynamic_retrieval_config: {
+  //       mode: "MODE_DYNAMIC",
+  //       dynamic_threshold: 0.1,
+  //     }
+  //   }
+  // }]
 });
 
 // Process and optimize the question
