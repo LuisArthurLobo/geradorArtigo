@@ -6,7 +6,6 @@ import InputSection from './InputSection';
 import DotsNavigation from './DotsNavigation';
 import VersionInfo from './VersionInfo';
 import ThinkingAnimation from './ThinkingAnimation';
-import { useAmplitude } from '../../hooks/useAmplitude';
 
 const AICareerGuide = () => {
   const [topic, setTopic] = useState('');
@@ -20,7 +19,12 @@ const AICareerGuide = () => {
     { text: "InVision", color: "blue" }
   ]);
   const messagesContainerRef = useRef(null);
-  const { logEvent } = useAmplitude();
+
+  const logEvent = (eventName, eventProperties = {}) => {
+    if (typeof window !== 'undefined' && window.amplitude) {
+      window.amplitude.track(eventName, eventProperties);
+    }
+  };
 
   const allSuggestions = [
     { text: "Desenvolvimento pessoal", color: "orange" },
@@ -42,6 +46,9 @@ const AICareerGuide = () => {
       { ...shuffled[1], color: "pink" },
       { ...shuffled[2], color: "blue" }
     ]);
+
+    // Log page view
+    logEvent('page_view', { page: 'ai_career_guide' });
   }, []); // Empty dependency array means this runs once on mount
 
   const handleSuggestionClick = (suggestion) => {

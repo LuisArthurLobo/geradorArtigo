@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
-import { AmplitudeProvider } from './providers/AmplitudeProvider';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,12 +26,23 @@ export default function RootLayout({ children }) {
           src="https://fonts.googleapis.com/css2?family=Redacted+Script:wght@300;400;700&display=swap" 
           strategy="beforeInteractive"
         />
+        <Script 
+          src="https://cdn.amplitude.com/script/501af040b85c78a72f7df04158ed9273.js"
+          strategy="beforeInteractive"
+        />
+        <Script id="amplitude-init">
+          {`
+            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+            window.amplitude.init('501af040b85c78a72f7df04158ed9273', {
+              "fetchRemoteConfig": true,
+              "autocapture": true
+            });
+          `}
+        </Script>
       </head>
       <body>
-        <AmplitudeProvider>
-          {children}
-          <Analytics />
-        </AmplitudeProvider>
+        {children}
+        <Analytics />
       </body>
     </html>
   );
