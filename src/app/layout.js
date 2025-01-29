@@ -28,15 +28,21 @@ export default function RootLayout({ children }) {
         />
         <Script 
           src="https://cdn.amplitude.com/script/501af040b85c78a72f7df04158ed9273.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
-        <Script id="amplitude-init">
+        <Script id="amplitude-init" strategy="afterInteractive">
           {`
-            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-            window.amplitude.init('501af040b85c78a72f7df04158ed9273', {
-              "fetchRemoteConfig": true,
-              "autocapture": true
-            });
+            if (typeof window !== 'undefined') {
+              window.addEventListener('load', function() {
+                if (window.amplitude) {
+                  window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+                  window.amplitude.init('501af040b85c78a72f7df04158ed9273', {
+                    fetchRemoteConfig: true,
+                    autocapture: true
+                  });
+                }
+              });
+            }
           `}
         </Script>
       </head>

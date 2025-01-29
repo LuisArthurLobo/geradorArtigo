@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Script from 'next/script';
 import styles from './styles.module.css';
 import TypingAnimation from './TypingAnimation';
 import renderMarkdown from './markdownRenderer';
@@ -114,6 +115,13 @@ const AICareerGuide = () => {
 
   return (
     <div className={styles.container}>
+      <script src="https://cdn.amplitude.com/script/501af040b85c78a72f7df04158ed9273.js" />
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+          window.amplitude.init('501af040b85c78a72f7df04158ed9273', {"fetchRemoteConfig":true,"autocapture":true});
+        `
+      }} />
       <div className={styles.headerContainer}>
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>Vou te ajudar a acelerar sua carreira</h1>
