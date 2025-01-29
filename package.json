@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@amplitude/analytics-browser": "^2.11.11",
     "@google/generative-ai": "^0.21.0",
+    "@vercel/analytics": "^1.4.1",
     "next": "13.5.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

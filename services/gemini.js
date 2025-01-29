@@ -1,14 +1,16 @@
-import {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} from "@google/generative-ai";
+import axios from 'axios';
 
 // Get API key from environment variable
-const apiKey = process.env.GEMINI_API_KEY;
+const apiKey = process.env.DEEPSEEK_API_KEY;
 
-// Initialize the Gemini AI client
-const genAI = new GoogleGenerativeAI(apiKey);
+// Initialize axios instance with DeepSeek API configuration
+const deepseekAPI = axios.create({
+  baseURL: 'https://api.deepseek.com/v1',
+  headers: {
+    'Authorization': `Bearer ${apiKey}`,
+    'Content-Type': 'application/json'
+  }
+});
 
 // Store chat history and questions
 let questionHistory = [];
@@ -95,90 +97,79 @@ Retomada dos temas principais
 Chamada para ação implícita
 Abertura para reflexão adicional<regra2> `;
 
-// Initialize models with specific configurations
-const thinkingModel = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash-8b",
-  generationConfig: {
-    temperature: 1,
-    topP: 1,
-    topK: 40,
-    maxOutputTokens: 3500,
-  },
-});
+// Configuration for thinking model
+const thinkingConfig = {
+  model: "deepseek-chat",
+  temperature: 1,
+  max_tokens: 3500,
+  frequency_penalty: 1,
+  presence_penalty: 1,
+  top_p: 1,
+};
 
-const responseModel = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-  generationConfig: {
-    temperature: 2,
-    topP: 0.95,
-    topK: 40,
-    maxOutputTokens: 8192,
-  }
-  //, tools: [{
-  //   google_search_retrieval: {
-  //     dynamic_retrieval_config: {
-  //       mode: "MODE_DYNAMIC",
-  //       dynamic_threshold: 0.1,
-  //     }
-  //   }
-  // }]
-});
+// Configuration for response model
+const responseConfig = {
+  model: "deepseek-chat",
+  temperature: 2,
+  max_tokens: 8192,
+  frequency_penalty: 0.95,
+  presence_penalty: 0.95,
+  top_p: 0.95,
+};
 
 // Process and optimize the question
 async function processQuestion(rawQuestion) {
   try {
-    // Store the original question
-    questionHistory.push({
-      original: rawQuestion,
-      timestamp: new Date().toISOString()
+    const messages = [
+      { role: "system", content: thinkingPrompt },
+      { role: "user", content: rawQuestion }
+    ];
+
+    const response = await deepseekAPI.post('/chat/completions', {
+      ...thinkingConfig,
+      messages
     });
 
-    // Think experimental - optimize the question using the thinking model
-    const prompt = `${thinkingPrompt} ${rawQuestion}`;
-    const thinkingResult = await thinkingModel.generateContent(prompt);
-    const optimizedQuestion = await thinkingResult.response.text();
-
-    return {
-      original: rawQuestion,
-      optimized: optimizedQuestion,
-      processed: true
-    };
+    return response.data.choices[0].message.content;
   } catch (error) {
     console.error('Error processing question:', error);
-    return {
-      original: rawQuestion,
-      optimized: rawQuestion,
-      processed: false
-    };
+    throw error;
   }
 }
 
+// Main chat function
 async function chat(message) {
-  if (!apiKey) {
-    throw new Error('GEMINI_API_KEY environment variable is required');
-  }
-
   try {
-    // Process the question using the thinking model
+    // Add message to history
+    questionHistory.push(message);
+
+    // Process the question first
     const processedQuestion = await processQuestion(message);
 
-    // Generate the response using the flash model with the response prompt
-    const fullPrompt = `${responsePrompt} ${processedQuestion.optimized}`;
-    const result = await responseModel.generateContent(fullPrompt);
-    const response = await result.response;
-    const text = response.text();
+    // Generate the final response
+    const messages = [
+      { role: "system", content: responsePrompt },
+      { role: "user", content: processedQuestion }
+    ];
 
-    return text;
+    const response = await deepseekAPI.post('/chat/completions', {
+      ...responseConfig,
+      messages
+    });
+
+    return response.data.choices[0].message.content;
   } catch (error) {
     console.error('Error in chat:', error);
     throw error;
   }
 }
 
+// Reset chat history
 function resetChat() {
   questionHistory = [];
 }
 
+// Get question history
 function getQuestionHistory() {
   return questionHistory;
 }

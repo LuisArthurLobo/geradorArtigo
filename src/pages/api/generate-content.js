@@ -1,4 +1,4 @@
-import geminiService from '../../../services/gemini';
+import { generateContent } from '../../../services/deepseek';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,12 +12,16 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Topic is required' });
     }
 
-    // Use the gemini service to generate content
-    const response = await geminiService.chat(topic);
+    // Check if API key is loaded
+    if (!process.env.DEEPSEEK_API_KEY) {
+      console.error('DEEPSEEK_API_KEY is not set in environment variables');
+      return res.status(500).json({ message: 'API key not configured' });
+    }
 
-    return res.status(200).json({ content: response });
+    const content = await generateContent(topic);
+    return res.status(200).json({ content });
   } catch (error) {
-    console.error('Error generating content:', error);
-    return res.status(500).json({ message: 'Error generating content', error: error.message });
+    console.error('Error in API route:', error);
+    return res.status(500).json({ message: error.message || 'Internal server error' });
   }
 }

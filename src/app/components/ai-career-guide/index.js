@@ -6,6 +6,7 @@ import InputSection from './InputSection';
 import DotsNavigation from './DotsNavigation';
 import VersionInfo from './VersionInfo';
 import ThinkingAnimation from './ThinkingAnimation';
+import { useAmplitude } from '../../hooks/useAmplitude';
 
 const AICareerGuide = () => {
   const [topic, setTopic] = useState('');
@@ -19,6 +20,7 @@ const AICareerGuide = () => {
     { text: "InVision", color: "blue" }
   ]);
   const messagesContainerRef = useRef(null);
+  const { logEvent } = useAmplitude();
 
   const allSuggestions = [
     { text: "Desenvolvimento pessoal", color: "orange" },
@@ -43,6 +45,7 @@ const AICareerGuide = () => {
   }, []); // Empty dependency array means this runs once on mount
 
   const handleSuggestionClick = (suggestion) => {
+    logEvent('suggestion_clicked', { suggestion });
     setTopic(suggestion);
     generateContent();
   };
@@ -50,6 +53,7 @@ const AICareerGuide = () => {
   const generateContent = async () => {
     if (!topic.trim()) return;
     
+    logEvent('generate_content_started', { topic: topic.trim() });
     setError(null);
     setCurrentProcessing({
       question: topic,
@@ -78,8 +82,13 @@ const AICareerGuide = () => {
         answer: data.content
       }));
 
+      logEvent('generate_content_success', { topic: topic.trim() });
       setTopic('');
     } catch (err) {
+      logEvent('generate_content_error', { 
+        topic: topic.trim(),
+        error: err.message 
+      });
       setError(err.message || 'Failed to generate content. Please try again.');
       setCurrentProcessing(null);
     }
@@ -87,6 +96,7 @@ const AICareerGuide = () => {
 
   const handleTypingComplete = () => {
     if (currentProcessing) {
+      logEvent('typing_animation_complete');
       setMessages(prev => [...prev, {
         answer: currentProcessing.answer
       }]);
